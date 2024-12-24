@@ -14,7 +14,7 @@ function App() {
     if (!newTask.trim()) return; // Prevent empty task submission
 
     axios
-      .post('http://localhost:5000/save-todo', { text: newTask })
+      .post(`${import.meta.env.VITE_BACKEND}/save-todo`, { text: newTask })
       .then((res) => {
         setTasks([...tasks, res.data]); // Update tasks with the new task
         setNewTask(''); // Clear input field
@@ -27,7 +27,7 @@ function App() {
   // Delete a task
   const deleteTask = (id) => {
     axios
-      .delete(`http://localhost:5000/delete-todo/${id}`)
+      .delete(`${import.meta.env.VITE_BACKEND}/delete-todo/${id}`)
       .then(() => {
         alert('Do You Want To Delete...');
       })
@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/get-todo')
+      .get(`${import.meta.env.VITE_BACKEND}/get-todo`)
       .then((res) => {
         setTasks(res.data);
       })
