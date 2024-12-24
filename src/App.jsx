@@ -14,7 +14,7 @@ function App() {
     if (!newTask.trim()) return; // Prevent empty task submission
 
     axios
-      .post(`${import.meta.env.VITE_BACKEND}/save-todo`, { text: newTask },{headers: {
+      .post(`https://to-server.vercel.app/save-todo`, { text: newTask },{headers: {
         'Content-Type': 'application/json'
     }})
       .then((res) => {
@@ -29,7 +29,7 @@ function App() {
   // Delete a task
   const deleteTask = (id) => {
     axios
-      .delete(`${import.meta.env.VITE_BACKEND}/delete-todo/${id}`,
+      .delete(`https://to-server.vercel.app/delete-todo/${id}`,
         {
           headers: {
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND}/get-todo`,
+      .get(`https://to-server.vercel.app/get-todo`,
         {
           headers: {
             'Content-Type': 'application/json'
