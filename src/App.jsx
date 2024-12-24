@@ -14,7 +14,9 @@ function App() {
     if (!newTask.trim()) return; // Prevent empty task submission
 
     axios
-      .post(`${import.meta.env.VITE_BACKEND}/save-todo`, { text: newTask })
+      .post(`${import.meta.env.VITE_BACKEND}/save-todo`, { text: newTask },{headers: {
+        'Content-Type': 'application/json'
+    }})
       .then((res) => {
         setTasks([...tasks, res.data]); // Update tasks with the new task
         setNewTask(''); // Clear input field
@@ -27,7 +29,12 @@ function App() {
   // Delete a task
   const deleteTask = (id) => {
     axios
-      .delete(`${import.meta.env.VITE_BACKEND}/delete-todo/${id}`)
+      .delete(`${import.meta.env.VITE_BACKEND}/delete-todo/${id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+        }
+        })
       .then(() => {
         alert('Do You Want To Delete...');
       })
@@ -38,7 +45,12 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND}/get-todo`)
+      .get(`${import.meta.env.VITE_BACKEND}/get-todo`,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+        }}
+      )
       .then((res) => {
         setTasks(res.data);
       })
